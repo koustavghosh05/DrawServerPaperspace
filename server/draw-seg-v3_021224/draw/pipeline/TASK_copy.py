@@ -43,13 +43,24 @@ def determine_model(dir_path):
     model_name = None
     PROTOCOL_TO_MODEL = getUpdated_PROTOCOL_TO_MODEL(dir_path) #@NewAuthor ADDED
 
+    print("PROTOCOL_TO_MODEL")
+    print(PROTOCOL_TO_MODEL)
+    print("END\n\n")
     try:
         one_file_name = glob.glob(os.path.join(dir_path, DCM_REGEX), recursive=True)[0]
         ds = dcmread(one_file_name)
         dcm_protocol_name = ds.ProtocolName.lower()
         for protocol, model in PROTOCOL_TO_MODEL.items():
+            # print("protocol")
+            # print(protocol)
+            # print("END\n\n")
+            # print("model")
+            # print(model)
+            # print("END\n\n")
+            # print("dcm_protocol_name: ", dcm_protocol_name, "\n\n")
             if protocol in dcm_protocol_name:
                 model_name = model
+                # print("model_name: ", model_name, "\n\n")
                 break
 
     except IndexError:

@@ -119,7 +119,7 @@ def get_evaluation_file_paths(
 
     preds_dir = normpath(f"{results_dir}/fold_{fold_no}/validation")
     os.makedirs(preds_dir, exist_ok=True)
-
+    print("from Work/Pipeline/draw-seg-v3_021224/draw/train/train.py preds_dir:", preds_dir)
     dj_file = normpath(f"{results_dir}/{DATASET_JSON_FILENAME}")
     p_file = normpath(f"{results_dir}/{PLANS_JSON_FILENAME}")
 

@@ -92,7 +92,7 @@ def query():
 
     try:
         connection = sqlite3.connect(db_path)
-        print(f"Connected to the database at {db_path}")
+        #print(f"Connected to the database at {db_path}")
 
         cursor = connection.cursor()
         sql_query = "SELECT model,input_path FROM dicomlog where status = 'INIT' "
@@ -108,7 +108,7 @@ def query():
     finally:
         if connection:
             connection.close()
-            print("Database connection closed.")
+            #print("Database connection closed.")
         return records
     
     
@@ -119,10 +119,14 @@ def initiate_model_prediction(model_name, data_path):
     try:
         gpu_memory_free = get_gpu_memory()
         any_model_ran = False
+        print("gpu_memory_free:", gpu_memory_free)
+        print("REQUIRED_FREE_MEMORY_BYTES:", REQUIRED_FREE_MEMORY_BYTES)
 
         if gpu_memory_free >= REQUIRED_FREE_MEMORY_BYTES:
             LOG.info(f"{gpu_memory_free} MB free GPU. Trying {model_name}")
             LOG.info(f" 'initiate_model_predict' called with model_name = {model_name} and data_path = {data_path}")
+            print("model name:",model_name, " data_path:", data_path)
+            print(run_prediction(model_name, data_path))
             any_model_ran = any_model_ran or run_prediction(model_name, data_path)
 
         if not any_model_ran:
@@ -136,7 +140,7 @@ def task_model_prediction():
     # Python 3.8 minimum for this operator
     interval = 10 #in seconds
     while True:
-        print("function call starts")
+        #print("function call starts")
         result = query()
         if len(result) > 0:
             if result[0][0] and result[0][1]:

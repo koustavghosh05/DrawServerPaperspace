@@ -140,4 +140,9 @@ def predict_one_dataset(
 
 def get_final_output_dir(parent_dataset_name, preds_dir):
     final_output_dir = os.path.join(preds_dir, parent_dataset_name, "results")
-    return final_output_dir
+    print("in draw/predict/predict.py")
+    print("preds_dir:",preds_dir)
+    print("parent_dataset_name:",parent_dataset_name)
+    print("final_output_dir:",final_output_dir)
+    #return final_output_dir
+    return preds_dir
